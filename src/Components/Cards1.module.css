@@ -1,0 +1,116 @@
+.card-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+    color: #111C85;
+}
+
+.card-img-top
+{
+    width: 95%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.card-content {
+    /* background-color: blue; */
+    /* margin: 4%; */
+    /* display: flex  ; */
+    width: 100%;
+}
+
+.card-content2{
+    display: flex;
+    /* background-color: red; */
+}
+
+.card-price {
+    font-family: Josefin Sans;
+    font-size: 14px;
+    line-height: 16px;
+    color: #111C85;
+    margin-right: 1rem;
+}
+
+.card-price-former {
+    font-family: Josefin Sans;
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration-line: line-through;
+    color: #FF2AAA;
+    margin-right: 1rem;
+}
+
+.fa-star {
+    color: blue;
+    /* background-color: blue; */
+}
+
+.far{
+    color: yellow;
+}
+
+.item-description {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 28px;
+    color: #9295AA;
+}
+
+.card {
+    background: hsl(0, 0%, 100%);
+    box-shadow: 0px 0px 20px 5px rgba(248, 246, 253, 0.75);
+    margin: 1%;
+    width: 90%;
+
+
+
+}
+
+.card-body {
+    /* padding: 1rem; */
+    width: 70%;
+    /* background-color: chartreuse; */
+    /* display: flex; */
+
+}
+
+
+
+.sm-circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+    /* background-color: blue; */
+}
+
+.item-actions {
+    padding-right: 2rem;
+}
+
+.single-item{
+    display: flex;
+}
+
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+    .single-item{
+        display: inline-block  ;
+    }
+
+    .card-img-top{
+        width: 200%;
+    }
+}
+    
+
