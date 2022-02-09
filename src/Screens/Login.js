@@ -18,7 +18,7 @@ export default function Login() {
 
     const navigate = useNavigate();
    
- const { user, setUser } = useContext(UserContext)
+//  const { user, setUser } = useContext(UserContext)
     useEffect(() => {
         if(localStorage.getItem('user-info')){
             navigate('/users')
@@ -78,8 +78,14 @@ useEffect(() => {
                  toast.success('Login Successful')
                     localStorage.setItem("token", JSON.stringify(data.token));
                     localStorage.setItem("user-info", JSON.stringify(data.data));
-                    setUser(data);
-                    navigate('/users')
+                    //check local storage if there is any intended url 
+                    if (localStorage.getItem('intended1') ){
+                        let intendedUrl = JSON.parse(localStorage.getItem('intended1'))
+                        console.log('Intended Url', intendedUrl)
+                        navigate(intendedUrl)
+                    }else{
+                        navigate('/users')
+                    }
                 }
             })
             .catch((err) => {
@@ -102,7 +108,7 @@ useEffect(() => {
 
                 <h4 style={{ textAlign: "center" }} id="login-txt">Login</h4>
                 <p style={{ textAlign: "center" }} className="login-txt mb-4">Please login using account details below</p>
-                <div className="text-danger center">{error}</div>
+                <div className="text-danger text-center h3">{error}</div>
 
                 <input className='login-input' type="email" placeholder="Email address" name='email' value={formData.email} onChange={handleChange} 
                 onBlur={(e) => {

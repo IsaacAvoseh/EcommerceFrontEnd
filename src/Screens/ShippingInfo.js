@@ -27,6 +27,8 @@ function ShippingInfo() {
   }
   }
   checkUser();
+
+
   const {
     isEmpty,
     totalUniqueItems,
@@ -62,14 +64,10 @@ const reference = (new Date().getTime().toString()) ;
 
   //call api to get shipping info 
   const callShipping = () => {
-    // localStorage.setItem("shipping-info",user)
 
     console.log('Loading')
     fetch(`${url}/shipping`, {
       headers: myHeaders
-      // body: JSON.stringify({
-      //   user_id: JSON.parse(localStorage.getItem('user-info')).id,
-      // }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -139,10 +137,14 @@ const reference = (new Date().getTime().toString()) ;
 
 const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
 
-  const shipping_id = shippingInfo !== null ? shippingInfo.id :JSON.parse(localStorage.getItem('user-info')).id;
+  const shipping_id = shippingInfo !== null ? shippingInfo.id : JSON.parse(localStorage.getItem('user-info')).id; 
+
+  
+  //headers
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   myHeaders.append("Authorization", "Bearer " + JSON.parse(localStorage.getItem('token')));
+
   const myInit = {
     method: 'POST',
     body: JSON.stringify({
@@ -156,11 +158,12 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
     cache: 'default'
   };
 
+
+
    const handleClick2 =() =>{
    
    console.log('Pressed2');
 
-  
     fetch(`${url}/initailpayment`, myInit)
       .then(response => response.json())
       .then(data => {
@@ -170,6 +173,8 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
         }
       })
  }
+
+
 
 
   const callFunction = () => {
@@ -189,7 +194,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
   
 
   const noItems = <dv>
-    <h1>No items in cart</h1>
+    <h1>No items in cart </h1>
   </dv>
 
   const componentProps = {
@@ -207,15 +212,19 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
     onSuccess: (response) => {
       const payment = {
         reference: reference,
-        status: response.status,
-       
+        status: response.status, 
+        email: user.email,
+        name: user.name,
+        cart,
       }
+      // console.log('cartitems', cart)
+
       console.log(payment)
       console.log(response)
       fetch(`${url}/payment/update`, {
         method: "POST",
-       headers: myHeaders,
-        body: JSON.stringify( payment ),
+        headers: myHeaders,
+        body: JSON.stringify(payment),
       })
       .then((res) => res.json())
       .then((data) => {
@@ -225,7 +234,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
        swal('Thank You !','Payment Successful', 'success')
         setTimeout(() => {
           navigate('/completed')
-        }, 2000);
+        }, 1000);
       }
         if (data.error) {
          swal(data.errors)
@@ -385,6 +394,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
 
           <CartTotals
             total={cartTotal}
+            noItems={noItems}
             total1={cartTotal}
             title={ 
               <PaystackButton {...componentProps} />}

@@ -22,6 +22,9 @@ export default function Homepage() {
 
     const [isLoading, setIsLoading] = React.useState(true);
     const [data, setData] = React.useState([]);
+    const [ featured , setFeatured] = React.useState([]);
+    const [ trending , setTrending] = React.useState([]);
+    const [latest, setLatest] = React.useState([]);
 
 
 
@@ -42,8 +45,37 @@ export default function Homepage() {
 
     }
 
+    //get featured products from api
+    const getFeaturedProducts = () => {
+        fetch(`${url}/featured`)
+        .then(response => response.json())
+        .then(data => {
+            setFeatured(data);
+            setIsLoading(false);
+            console.log(data);
+        //    localStorage.setItem('featured', JSON.stringify(data));    
+        })
+        .catch(error => console.log(error))
+    }
+
+//get latest products from api
+    const getLatestProducts = () => {
+        fetch(`${url}/latest`)
+        .then(response => response.json())
+        .then(data => {
+            setLatest(data);
+            setIsLoading(false);
+            console.log(data);
+        //    localStorage.setItem('latest', JSON.stringify(data));
+        })
+        .catch(error => console.log(error))
+    }
+
+
     useEffect(() => {
         getProducts()
+        getFeaturedProducts()
+        getLatestProducts()
     }, [])
 
 
@@ -58,7 +90,6 @@ export default function Homepage() {
         <div className="row">
         <div className="col-lg-1">
         <img src="lamp.png" alt="" className="lamp-top" />
-
         </div>
         <div className="col-lg-6">
         <div className="wrapper">
@@ -96,7 +127,7 @@ export default function Homepage() {
                 isLoading ? (
                             <Loading />
                 ) : (
-                    data.data.slice(0, 4).map(product => (
+                        featured.data?.slice(0, 4).map(product => (
                         <FeaturedCard
                         key={product.id}
                         id={product.id}
@@ -133,7 +164,7 @@ export default function Homepage() {
                 isLoading ? (
                             <Loading />
                 ) : (
-                    data.data.slice(4, 9).map(product => (
+                    latest?.data?.map(product => (
                         <LateCard
                         key={product.id}
                         id={product.id}
@@ -208,7 +239,7 @@ export default function Homepage() {
                     isLoading ? (
                          <Loading/>
                     ) : (
-                        data.data.slice(0, 4).map(product => (
+                        data?.data?.slice(0, 4).map(product => (
                             <CardTrending
                             key={product.id}
                             id={product.id}
@@ -252,7 +283,7 @@ export default function Homepage() {
                             isLoading ? (
                                     <Loading />
                             ) : (
-                                data.data.slice(4, 8).map(product => (
+                                data?.data?.slice(4, 8).map(product => (
                                  <>
                                         <Link to={`/product/${product.id}`}>
 
@@ -328,7 +359,7 @@ export default function Homepage() {
                     isLoading ? (
                             <Loading />
                     ) : (
-                        data.data.slice(4, 8).map(product => (
+                        data?.data?.slice(4, 8).map(product => (
                             <TopCard
                                 img={imageBaseUrl + product.image}
                                 title={product.name}

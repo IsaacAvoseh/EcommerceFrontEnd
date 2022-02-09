@@ -133,12 +133,19 @@
    
     background-color:  #DBDBDB;
   }
+  
 
   .card-img-top{
     height: 200px;
     width: 100%;
     border-radius: 10px;
     background-color: #DBDBDB;
+    object-fit: contain;
+    /* background: #8b0f0f; */
+
+  }
+  .card-img-top img{
+
   }
 
   .icons-feature{
@@ -710,4 +717,5 @@
 
 
   }
+
 

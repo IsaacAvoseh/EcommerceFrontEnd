@@ -18,7 +18,7 @@
 }
 
 .ul1{
-  margin-left: 350px !important;
+  /* margin-left: 350px !important; */
 }
 .navbar-brand-b{
   color: #0D0E43 !important;
@@ -663,4 +663,17 @@ a{
 .order-completed-clock{
   width: auto;
   height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .newr {
+    /* background-color: #7E33E0 !important; */
+  
+
+  }
+  .ul1{
+  
+   margin-left: -350px !important;
+    background: crimson;
+  }
 }

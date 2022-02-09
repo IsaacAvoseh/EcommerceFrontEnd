@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import BreadCrumb from '../Components/BreadCrumb'
 import Cards from '../Components/Cards'
@@ -9,35 +9,74 @@ import Nav from '../Components/Nav'
 import styles from "./Shop.module.css";
 import { useCart } from "react-use-cart"
 import ProductCard from '../Components/ProductCard'
+import { SearchContext } from '../context/SearchContext';
+import Pagination from '../Components/Pagination'
+
 
 export default function ShopLeft(props) {
   const imageBaseUrl = "http://127.0.0.1:8000/images/";
   const url = "http://127.0.0.1:8000/api";
 
   const { addItem } = useCart();
-
+  const { searchProducts, input, data, setData, search } = useContext(SearchContext);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [dataPerPage] = React.useState(10);
+  // const { data, setData } = React.useContext(SearchContext);
 
   const [list, setList] = React.useState(false);
-  const [data, setData] = React.useState(localStorage.getItem("products") ? JSON.parse(localStorage.getItem("products")) : []);
   const [isLoading, setIsLoading] = React.useState(true);
   const [brands, setBrands] = React.useState([]);
   const [categories, setCategories] = React.useState([]);
-  const [input, setInput] = React.useState('')
 
-  const prod = JSON.parse(localStorage.getItem('products'))
-  console.log('prorororo', prod);
+  const checkBox = document.getElementsByClassName('form-check-input');
 
-  // const [cart, setCart] = React.useState(localStorage.getItem("cart")?JSON.parse(localStorage.getItem("cart")):[]);
 
-  //sort by brands
-  const sortByBrands = (e) => {
-    setInput(e.target.value)
-  //sort by categories
-  const sortByCategories = (e) => {
-    let categories = prod.filter(item => item.category === e.target.id);
-    setData(categories);
+  const setAllProducts = () => {
+    setData(copy.data);
   }
+  
+
+  const copy =  JSON.parse(localStorage.getItem("products"));
+
+    //sort by brands
+
+    const sortByBrands = (e) => {
+ //return item with same brand
+      let brands = copy.data.filter(item => item.brand_id == e.target.id);
+      setData(brands);
+     console.log('brandsLiest', brands);
     }
+  
+    //sort by categories
+    const sortByCategories = (e) => {
+      let categories = copy.data.filter(item => item.category_id == e.target.id);
+      setData(categories);
+      // checkBox.checked = !checkBox.checked;
+      console.log('categoriesList', categories);
+    }
+
+    //sort by price
+    const sortByPrice = (e) => {
+      let price = copy.data.sort((a, b) => {
+        if(e.target.id === 'low'){
+          return a.price - b.price;
+        }
+        else if(e.target.id === 'high'){
+          return b.price - a.price;
+        }
+        else if(e.target.id === 'all'){
+          return a.price - b.price;
+        }
+        else{
+          return a.price - b.price;
+        }
+      });
+      setData(price);
+      console.log('priceList', price);
+    }
+
+
+
 
   //state to manage  checkbox
   const [checked, setChecked] = React.useState([]);
@@ -48,27 +87,7 @@ export default function ShopLeft(props) {
   }
   
 
-  //sort by price
-  const sortByPrice = (e) => {
-    let price = data.filter(item => item.price === e.target.value);
-    setList(price);
-  }
-  
-//search through procducts in local storage onfocus
 
-    const set = (arr, query) => {
-      return arr.data.filter(el => el.name.toLowerCase().indexOf(query.toLowerCase()) !== -1)
-    }
-
-   const search = (inputV) => {
-      let sel = set(prod, inputV);
-     setData(sel);
-   }  
-    // let products = data.filter(item => item.name.toLowerCase().includes(inputV.toLowerCase()));
-    // setList(products);
- 
-
-  //call api to get products from database
 
   const getProducts = () => {
     fetch(`${url}/products`)
@@ -129,7 +148,7 @@ export default function ShopLeft(props) {
     getCategories();
     if (data.length !== 0) {
       console.log('Local data', data);
-      setData(data.data);
+      setData(data.data || copy.data);
       setIsLoading(false);
 
       setList(true);
@@ -144,23 +163,33 @@ export default function ShopLeft(props) {
     console.log("clicked");
     setList(!list);
   };
+  // const copy = JSON.parse(localStorage.getItem("products"));
+
+  //pagination function// to use pagination, map the page data with currentData
+  const indexOfLastData = currentPage * dataPerPage;
+  const indexOfFirstData = indexOfLastData - dataPerPage;
+  const currentData = copy.data?.slice(indexOfFirstData, indexOfLastData);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  //pagination ends here
 
 
     return (
         <div>
-        <Nav
-        input={input}
-        setInput={setInput}
-      data={search}
-        
-          active5 = "active"
+        <Nav  
+        active5 = "active"
+      
+
         />
 
         <Header
         title = {list? 'shop grid': 'shop list'}
     
         />
-        <BreadCrumb press={showList} press2={showList} focus={ search } />
+        <BreadCrumb press={showList} press2={showList}/>
 
         <div className="container">
 
@@ -172,13 +201,17 @@ export default function ShopLeft(props) {
               <div className="right-filter">
                 <p>Product Brand</p>
                 <ul className="right-filter-ul">
+                    <li className>
+                      <input name='brand' className="form-check-input form-check-input3" type="radio" onClick={ setAllProducts } name='brand'/>
+                      <label className="form-check-label">All Products</label>
+                    </li>
 
                  {
                     brands.map(brand => ( 
                       
                       <li className>
                         {/* <input type="checkbox" id={brand.id} value={brand.id} onClick={sortByBrands}/> */}
-                        <input name='brand' className="form-check-input form-check-input3" type="radio" onClick={() => sortByBrands(input)} value={input} name ={brand.id}  id="flexCheckDefault" />
+                        <input name='brand' className="form-check-input form-check-input3" type="radio"  name='brand' onClick={sortByBrands} id={brand.id} />
                         <label className="form-check-label">{brand.name}</label>
                       </li>
                     ))
@@ -193,7 +226,7 @@ export default function ShopLeft(props) {
                  {
                     categories.map(category => (
                       <li className>
-                        <input className="form-check-input form-check-input2" type="checkbox" value={input } onChange={handleToggle} id="flexCheckDefault" />
+                        <input className="form-check-input form-check-input2" type="radio" name='checkbox' onClick={ sortByCategories } id={ category.id } />
                         <label className="form-check-label">{category.name}</label>
                       </li>
                     ))
@@ -206,27 +239,27 @@ export default function ShopLeft(props) {
                 <p>Price Filter</p>
                 <ul className="right-filter-ul">
                   <li className>
-                    <input className="form-check-input form-check-input2" type="checkbox" defaultValue id="flexCheckDefault" />
-                    <label className="form-check-label">N0.00 - N150.00</label>
+                    <input className="form-check-input form-check-input2" type="radio" name='price' id="low" onClick={ sortByPrice } />
+                    <label className="form-check-label">Low</label>
                   </li>
                   <li className>
-                    <input className="form-check-input form-check-input2" type="checkbox" defaultValue id="flexCheckDefault" />
-                    <label className="form-check-label">N150.00 - N350.00</label>
+                      <input className="form-check-input form-check-input2" name='price' type="radio" id="high" onClick={sortByPrice} />
+                    <label className="form-check-label">High</label>
                   </li>
                   <li className>
-                    <input className="form-check-input form-check-input2" type="checkbox" defaultValue id="flexCheckDefault" />
-                    <label className="form-check-label">N150.00 - N504.00</label>
+                      <input className="form-check-input form-check-input2" name='price' type="radio" id='all' id="flexCheckDefault" onClick={sortByPrice} />
+                    <label className="form-check-label">Low - High</label>
                   </li>
                   <li className>
-                    <input className="form-check-input form-check-input2" type="checkbox" defaultValue id="flexCheckDefault" />
-                    <label className="form-check-label">N450.00 +</label>
+                      <input className="form-check-input form-check-input2" onClick={sortByPrice} name='price'  type="radio" id="flexCheckDefault" />
+                    <label className="form-check-label">High - Low </label>
                   </li>
                 </ul>
               </div>
-              <span className="bottom-search">
+              {/* <span className="bottom-search">
                 <input type="text" size className="search search-text" style={{width: '65%'}} />
                 <i className="fas fa-search input-search-icon" />
-              </span>
+              </span> */}
             </div>
             <div className="col-lg-10" style={
               {
@@ -244,10 +277,11 @@ export default function ShopLeft(props) {
                         <Loading/>
                       ) : (
                         <>
-                    { data.map(product => (
+                    { data?.map(product => (
                       <div className="col-lg-3">
                        
                        <Cards
+                        key={product.id}
                         name={product.name}
                         price={product.price}
                         addItem={addItem}
@@ -274,8 +308,8 @@ export default function ShopLeft(props) {
                     ) : (
                       data.map(product => (
                         <Cards1
-                         
-                          name={product.name}
+                         key={product.id}
+                         name={product.name}
                           price={product.price}
                           link={`/product/${product.id}`}
                           discount={product.discount_price}
@@ -296,7 +330,14 @@ export default function ShopLeft(props) {
             </div>
           </div>
         </div>
-       
+
+          <div>
+            <Pagination
+              dataPerPage={dataPerPage}
+              totalData={copy.data?.length}
+              paginate={paginate}
+            />
+          </div>
       </div>
         </div>
         

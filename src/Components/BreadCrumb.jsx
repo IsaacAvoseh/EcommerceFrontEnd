@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './BreadCrumb.module.css'
+import { SearchContext } from '../context/SearchContext'
 
 export default function BreadCrumb(props) {
+  const { input, setInput, search } = useContext(SearchContext);
+
+  const handleChange = (e) => {
+    if (input !== e.target.value) {
+      setInput(e.target.value);
+      search(e.target.value);
+    } else {
+      setInput("");
+    }
+  };
     return (
       <div className="container">
         <div className={styles["section-4"]}>
@@ -42,11 +53,11 @@ export default function BreadCrumb(props) {
                 <i onClick={props.press} id={styles['far']} className="fas fa-list" />
                 <i onClick={props.press2} className="fas fa-th-large" />
                 <input
-                onFocus={props.focus}
                 className={styles["search-input"]}
-                  
+                  onChange={handleChange}
                   size={15}
                   type="text"
+                  placeholder='Search'
                 />
               </div>
             </div>

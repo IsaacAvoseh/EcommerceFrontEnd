@@ -16,7 +16,10 @@ function CartTotals(props) {
       >
         Shipping & taxes calculated at checkout
       </label>
+      {
+        props.noItems?.length < 0 ? <Link to='/sidebar' ><button className="proceed-btn2 mt-4" > Shop Now <i className="fa fa-shop" ></i> </button></Link>: 
        <button  onClick={props.press} className="proceed-btn2 mt-4">{ props.title }</button>
+      }
     </div>
   );
 }

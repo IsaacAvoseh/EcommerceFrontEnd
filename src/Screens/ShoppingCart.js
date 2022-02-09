@@ -6,7 +6,8 @@ import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Nav from "../Components/Nav";
 import { useCart } from "react-use-cart"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const imageBaseUrl = "http://127.0.0.1:8000/images/";
 const url = "http://127.0.0.1:8000/api";
@@ -55,22 +56,27 @@ function ShoppingCart() {
 
 
   const noItems = <dv>
-    <h1>No items in cart</h1>
+    <h1>No items in cart  </h1>
   </dv>
 
 const handleClick = () =>{
    //check if user is logged in 
    if(localStorage.getItem('token')){
+     //check if cart is empty
     if(isEmpty){
       navigate('/shop')
     }else{ 
       navigate('/shipping')
     }
    }
+   //if user is not logged in and cart is empty
     else if(!localStorage.getItem('token') && isEmpty === true){
       navigate('/shop')
     }
+    // user is not logged but cart is  not empty
     else if(!localStorage.getItem('token') && isEmpty === false ){
+      localStorage.setItem('intended1', JSON.stringify('/shipping'))
+      swal('Please login to continue')
       navigate('/login')
     }
 }
@@ -128,7 +134,7 @@ const handleClick = () =>{
               
               {/* <CartProduct img="product3.png" price="32.00" qty="4" name="Hand Bag3" color="Pink" /> */}
               <div className="row">
-                  <div className="col-lg-3"><button className="update-cart-btn">Update Cart</button></div>
+                  <div className="col-lg-3"><Link to='/sidebar' className="update-cart-btn">Update Cart</Link></div>
                   <div className="col-lg-3"></div>
                   <div className="col-lg-3"></div>
                   <div className="col-lg-3"><button onClick={() => emptyCart()} className="clear-cart-btn">Clear Cart</button></div>

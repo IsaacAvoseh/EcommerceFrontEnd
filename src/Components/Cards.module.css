@@ -60,6 +60,8 @@ img{
     width: 60%;
     height: 80%;
     border-radius: 10px;
+    object-fit: contain;
+    /* background: #dbdbdb; */
 }
 
 .sm-circle {

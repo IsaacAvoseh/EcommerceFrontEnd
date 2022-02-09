@@ -9,8 +9,8 @@ import { UserContext } from '../context/UserContext'
 export default function Profile() {    
     const url = "http://127.0.0.1:8000/api";
 
-    const { user, setUser } = useContext(UserContext);
-    const { token, setToken } = useContext(UserContext);
+    // const { user, setUser } = useContext(UserContext);
+    // const { token, setToken } = useContext(UserContext);
  const getUserInfo = () => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -30,7 +30,7 @@ export default function Profile() {
         })
         .then(data => {
             console.log('data', data);
-            setUser(data);
+            // setUser(data);
         })
         .catch(error => console.log(error.message));
 }

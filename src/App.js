@@ -31,6 +31,8 @@ import {
   handleItemUpdated,
   handleItemRemoved,
 } from './utils/CartNotify.js';
+import SearchContextProvider from './context/SearchContext';
+import Pages from './Screens/Pages';
 
 const toastOptions = {
   position: 'top-right',
@@ -52,12 +54,12 @@ function App() {
 
 //remove user from local storage every 30 minutes
   useEffect(() => {
-    const interval = setInterval(() => {
-      console.log("clearing user");
-      localStorage.removeItem('user-info');
-      localStorage.removeItem('token');
-    }, 1.8e+6);
-    return () => clearInterval(interval);
+    // const interval = setInterval(() => {
+    //   console.log("clearing user");
+    //   localStorage.removeItem('user-info');
+    //   localStorage.removeItem('token');
+    // }, 1.8e+6);
+    // return () => clearInterval(interval);
   }, []);
 
   return (
@@ -71,21 +73,16 @@ function App() {
         onItemRemove={handleItemRemoved}
       >
 
-      <UserContext.Provider value={{
-        token, setToken, user, setUser, isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin
-      }}>
-       
-
+   <SearchContextProvider>
    <BrowserRouter>
+
     <Routes>
       <Route path="/" element = {<Homepage/>} />
       <Route path="/about" element = {<About/>} />
       <Route path="/contact" element = {<Contact/>} />
       <Route path="/sidebar" element = {<ShopLeft/>} />
-      {/* <Route path="/shopGrid" element = {<ShopGrid/>} /> */}
       <Route path='/shop' element = {<Shop />} />
-      {/* <Route path="/product-details" element = {<ProductDetails/>} /> */}
-    
+      
       <Route path="/login" element = {<Login/>} />
       <Route path="/register" element = {<Register/>} />
       <Route path="/product/:id" element = {<ProductDetails/>} />
@@ -94,6 +91,7 @@ function App() {
       <Route path="/cart" element = {<ShoppingCart/>} />
       <Route path="/shipping" element = {<ShippingInfo/>} />
       <Route path='/users' element ={<Profile/>} />
+      <Route path='/pages' element ={<Pages/>} />
      
     </Routes>
          
@@ -103,7 +101,7 @@ function App() {
    </BrowserRouter>
        
 
-    </UserContext.Provider>
+    </SearchContextProvider>
     </CartProvider>
   
     </div>
