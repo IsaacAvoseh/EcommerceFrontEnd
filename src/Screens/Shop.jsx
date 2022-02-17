@@ -71,7 +71,7 @@ export default function Shop() {
   //pagination function , to sue pagination map the page data with currentData
   const indexOfLastData = currentPage * dataPerPage;
   const indexOfFirstData = indexOfLastData - dataPerPage;
-  const currentData = copy.data?.slice(indexOfFirstData, indexOfLastData);
+  // const currentData = copy.data?.slice(indexOfFirstData, indexOfLastData);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -135,8 +135,8 @@ export default function Shop() {
       <div>
         <Pagination
           dataPerPage={dataPerPage}
-          totalData={copy.data?.length}
-          paginate={paginate}
+          // totalData={copy.data?.length}
+          // paginate={paginate}
         />
       </div>
 

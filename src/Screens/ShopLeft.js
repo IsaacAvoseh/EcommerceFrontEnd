@@ -168,7 +168,7 @@ export default function ShopLeft(props) {
   //pagination function// to use pagination, map the page data with currentData
   const indexOfLastData = currentPage * dataPerPage;
   const indexOfFirstData = indexOfLastData - dataPerPage;
-  const currentData = copy.data?.slice(indexOfFirstData, indexOfLastData);
+  // const currentData = copy.data?.slice(indexOfFirstData, indexOfLastData);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -306,7 +306,7 @@ export default function ShopLeft(props) {
                     isLoading? ( 
                       <Loading/>
                     ) : (
-                      data.map(product => (
+                      data?.map(product => (
                         <Cards1
                          key={product.id}
                          name={product.name}
@@ -333,9 +333,9 @@ export default function ShopLeft(props) {
 
           <div>
             <Pagination
-              dataPerPage={dataPerPage}
-              totalData={copy.data?.length}
-              paginate={paginate}
+              // dataPerPage={dataPerPage}
+              // totalData={copy.data?.length}
+              // paginate={paginate}
             />
           </div>
       </div>
