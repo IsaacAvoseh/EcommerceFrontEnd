@@ -47,20 +47,20 @@ const toastOptions = {
 
 function App() {
   
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  // const [token, setToken] = useState(null);
+  // const [user, setUser] = useState(null);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState(false);
 
 //remove user from local storage every 30 minutes
-  useEffect(() => {
+  // useEffect(() => {
     // const interval = setInterval(() => {
     //   console.log("clearing user");
     //   localStorage.removeItem('user-info');
     //   localStorage.removeItem('token');
     // }, 1.8e+6);
     // return () => clearInterval(interval);
-  }, []);
+  // }, []);
 
   return (
     
