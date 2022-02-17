@@ -72,7 +72,7 @@ export default function Homepage() {
     }
 
 
-    useEffect(() => {
+    React.useEffect(() => {
         getProducts()
         getFeaturedProducts()
         getLatestProducts()

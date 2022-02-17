@@ -47,7 +47,7 @@ export default function Profile() {
     }
     checkUser();
 
-    useEffect(() => {
+    React.useEffect(() => {
         getUserInfo();
     }, [])
  

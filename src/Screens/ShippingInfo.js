@@ -184,7 +184,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
 
 
 
-  useEffect(() => {
+  React.useEffect(() => {
     // checkUser()
     swal('Please fill in your shipping information to continue')
    callShipping()
