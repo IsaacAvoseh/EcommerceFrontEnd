@@ -8,7 +8,7 @@ import { SearchContext } from '../context/SearchContext';
 
 export default function Nav(props) {
 
-  const { input, setInput, search } = useContext(SearchContext);
+  const { input, setInput, search } = React.useContext(SearchContext);
   console.log('inputContext', input);
 
   const navigate = useNavigate();
