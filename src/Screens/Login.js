@@ -75,7 +75,7 @@ useEffect(() => {
             .then((data) => {
                 console.log(data);
                 if (data.status === "error" || data.errors) {
-                    swal('Error', data.message, 'error')
+                    swal('Error', data.errors, 'error')
                     return;
                 } else if( !data.data === null || !data.data === undefined){
                  toast.success('Login Successful')

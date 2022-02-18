@@ -69,11 +69,10 @@ export default function Register() {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if (data) {
+                if (data.success === true) {
                     setFormData(initialValue);
                    swal("Success", "Registration Successful", "success");
                     navigate('/login')
-
 
                 } else {
                     setError(data.message);
