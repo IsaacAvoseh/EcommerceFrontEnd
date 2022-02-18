@@ -42,16 +42,16 @@ function ShippingInfo() {
   } = useCart();
 
   const publicKey = "pk_test_ca5483b1ebbff03f56af48ca9e744bd36d10e50c"
-  const [amount, setAmount] = useState(cartTotal * 100)
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [address, setAddress] = useState('')
-  const [address2, setAddress2] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
-  const [zip, setZip] = useState('')
-  const [error, setError] = useState('')
-  const [phone, setPhone] = useState("")
+  const [amount, setAmount] = React.useState(cartTotal * 100)
+  const [email, setEmail] = React.useState('')
+  const [name, setName] = React.useState('')
+  const [address, setAddress] = React.useState('')
+  const [address2, setAddress2] = React.useState('')
+  const [city, setCity] = React.useState('')
+  const [state, setState] = React.useState('')
+  const [zip, setZip] = React.useState('')
+  const [error, setError] = React.useState('')
+  const [phone, setPhone] = React.useState("")
   
 
 

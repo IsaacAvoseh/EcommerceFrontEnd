@@ -9,7 +9,7 @@ export default function Pages() {
     const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
     const url = "https://hecto-ecom.herokuapp.com/api";
 
-    console.log('pageBanner', pageBanner);
+    // console.log('pageBanner', pageBanner);
     return (
         <div>
             <Nav
