@@ -13,8 +13,8 @@ export default function Nav(props) {
 
   const navigate = useNavigate();
 
-  const [user, setUser ] = useState(JSON.parse(localStorage.getItem('user-info')) || '')
-  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser ] = React.useState(JSON.parse(localStorage.getItem('user-info')) || '')
+  const [isLoading, setIsLoading] = React.useState(true)
  
 
   const { totalItems } = useCart();
