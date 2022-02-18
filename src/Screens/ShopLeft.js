@@ -14,8 +14,10 @@ import Pagination from '../Components/Pagination'
 
 
 export default function ShopLeft(props) {
-  const imageBaseUrl = "http://127.0.0.1:8000/images/";
-  const url = "http://127.0.0.1:8000/api";
+
+  const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+  const url = "https://hecto-ecom.herokuapp.com/api";
+
 
   const { addItem } = useCart();
   const { searchProducts, input, data, setData, search } = useContext(SearchContext);

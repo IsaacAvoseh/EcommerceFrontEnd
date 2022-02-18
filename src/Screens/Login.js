@@ -14,7 +14,10 @@ import { toast } from 'react-toastify'
 
 export default function Login() {
     
-    const url = "http://127.0.0.1:8000/api";
+
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
+
 
     const navigate = useNavigate();
    

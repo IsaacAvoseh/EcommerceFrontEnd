@@ -59,8 +59,8 @@ function ShippingInfo() {
 
 const reference = (new Date().getTime().toString()) ;
 
-  const imageBaseUrl = "http://127.0.0.1:8000/images/";
-  const url = "http://127.0.0.1:8000/api";
+  const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+  const url = "https://hecto-ecom.herokuapp.com/api";
 
   //call api to get shipping info 
   const callShipping = () => {

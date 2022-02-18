@@ -18,7 +18,10 @@ const initialValue = {
 const eye = <i class="fas fa-eye"></i>;
 
 export default function Register() {
-    const url = "http://127.0.0.1:8000/api";
+
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
+
     const navigate = useNavigate();
 
     // consume api from laravel for user registration

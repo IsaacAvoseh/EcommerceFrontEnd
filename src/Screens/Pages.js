@@ -5,8 +5,10 @@ import BreadCrumb from '../Components/BreadCrumb'
 import PagesCard from '../Components/PagesCard';
 
 export default function Pages() {
-    const imageBaseUrl = "http://127.0.0.1:8000/images/";
-    const pageBanner = JSON.parse(localStorage.getItem('products'))
+
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
+
     console.log('pageBanner', pageBanner);
     return (
         <div>

@@ -7,7 +7,10 @@ import PreFooter from '../Components/PreFooter'
 import { UserContext } from '../context/UserContext'
 
 export default function Profile() {    
-    const url = "http://127.0.0.1:8000/api";
+
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
+
 
     // const { user, setUser } = useContext(UserContext);
     // const { token, setToken } = useContext(UserContext);

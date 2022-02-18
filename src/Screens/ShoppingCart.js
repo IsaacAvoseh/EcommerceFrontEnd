@@ -9,8 +9,9 @@ import { useCart } from "react-use-cart"
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
-const imageBaseUrl = "http://127.0.0.1:8000/images/";
-const url = "http://127.0.0.1:8000/api";
+
+const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+const url = "https://hecto-ecom.herokuapp.com/api";
 
 function ShoppingCart() {
 

@@ -22,8 +22,8 @@ const copy = JSON.parse(localStorage.getItem("products"));
 export default function Shop() {
   const { addItem } = useCart();
 
-  const imageBaseUrl = "http://127.0.0.1:8000/images/";
-  const url = "http://127.0.0.1:8000/api";
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
 
   const [list, setList] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
