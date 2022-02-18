@@ -16,8 +16,8 @@ import { useCart } from "react-use-cart"
 export default function Homepage() {   
     const { addItem } = useCart();
 
-    const imageBaseUrl = "http://127.0.0.1:8000/images/";
-    const url = "http://127.0.0.1:8000/api";
+    const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
+    const url = "https://hecto-ecom.herokuapp.com/api";
 
 
     const [isLoading, setIsLoading] = React.useState(true);
