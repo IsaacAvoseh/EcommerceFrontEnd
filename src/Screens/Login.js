@@ -77,7 +77,7 @@ useEffect(() => {
                 if (data.status === "error" || data.errors) {
                     swal('Error', data.message, 'error')
                     return;
-                } else {
+                } else if( !data.data === null || !data.data === undefined){
                  toast.success('Login Successful')
                     localStorage.setItem("token", JSON.stringify(data.token));
                     localStorage.setItem("user-info", JSON.stringify(data.data));
@@ -93,6 +93,7 @@ useEffect(() => {
             })
             .catch((err) => {
                 console.log(err);
+                return;
             });
     };
 
