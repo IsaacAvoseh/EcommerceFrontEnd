@@ -93,6 +93,7 @@ useEffect(() => {
             })
             .catch((err) => {
                 console.log(err);
+                swal('Something went wrong', 'Please try again', 'error')
                 return;
             });
     };
