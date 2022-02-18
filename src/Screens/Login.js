@@ -75,7 +75,7 @@ useEffect(() => {
             .then((data) => {
                 console.log(data);
                 if (data.status === "error" || data.errors) {
-                    swal('Error', data.errors, 'error')
+                    swal('Error', data.message, 'error')
                     return;
                 } else if( !data.data === null || !data.data === undefined){
                  toast.success('Login Successful')
@@ -94,7 +94,7 @@ useEffect(() => {
             .catch((err) => {
                 console.log(err);
                 console.log('Error Occured')
-                swal('Something went wrong', 'Please try again', 'error')
+                // swal('Something went wrong', 'Please try again', 'error')
                 return;
             });
     };

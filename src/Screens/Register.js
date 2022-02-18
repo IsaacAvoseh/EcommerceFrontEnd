@@ -104,6 +104,7 @@ export default function Register() {
               <p style={{ textAlign: "center" }} className="login-txt mb-4">
                   Please register using account details below
               </p>
+              <span className="error-txt text-danger ">{error}</span>
               <input
                   className="login-input "
                   type="text"
@@ -132,7 +133,7 @@ export default function Register() {
                   onChange={handleChange}
               />
               <i onClick={showPasswordHandler}>{eye}</i>
-              <span className="error-txt text-danger">{error}</span>
+              {/* <span className="error-txt text-danger">{error}</span> */}
               <span>
                   <input
                       className="login-input"
@@ -144,7 +145,7 @@ export default function Register() {
                   />
                   <i onClick={showPasswordHandler}>{eye}</i>
               </span>
-              <span className="error-txt text-danger ">{error}</span>
+              {/* <span className="error-txt text-danger ">{error}</span> */}
               <p className="login-txt mt-4 mb-4">Forgot your password?</p>
               <button
                   type="button"
@@ -155,7 +156,7 @@ export default function Register() {
                   Sign Up
               </button>
               <p className="login-txt mt-4" style={{ textAlign: "center" }}>
-                  Already have an Account? Login
+                  Already have an Account? <Link to="/login">Login</Link>
               </p>
           </div>
           <PreFooter/>
