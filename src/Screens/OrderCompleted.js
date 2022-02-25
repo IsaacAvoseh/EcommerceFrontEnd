@@ -34,7 +34,7 @@ function OrderCompleted() {
                   will be completed within 3-6 hours. You will receive an email
                   confirmation when your order is completed.
                 </p>
-               <Link to='/shop'> <button className="order-completed-btn">
+               <Link to='/sidebar'> <button className="order-completed-btn">
                   Continue Shopping
                 </button>
                 </Link>

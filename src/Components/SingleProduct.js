@@ -32,7 +32,7 @@ function SingleProduct(props) {
           <img className="details-img"
             src={props.image}
             style={{ padding: "8px 8px 4px" }}
-            alt="bag1"
+              alt="bag1" onError='https://hecto-ecom.herokuapp.com/images/image%201165.png'
           />
           <img className="details-img"
             src={props.image1}
