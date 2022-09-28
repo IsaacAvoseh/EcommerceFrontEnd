@@ -16,15 +16,15 @@ function ShippingInfo() {
   const user = JSON.parse(localStorage.getItem('user-info'));
 
   //revoke access to page if user is logged in 
- const checkUser = () =>{
-  if(!localStorage.getItem('token')){
-    swal('oops','You must be logged in to view this page', 'error');
-   setTimeout(()=>{
-     window.location.href = '/login'
-    }
-    ,3000)
+  const checkUser = () => {
+    if (!localStorage.getItem('token')) {
+      swal('oops', 'You must be logged in to view this page', 'error');
+      setTimeout(() => {
+        window.location.href = '/login'
+      }
+        , 3000)
 
-  }
+    }
   }
   checkUser();
 
@@ -52,12 +52,12 @@ function ShippingInfo() {
   const [zip, setZip] = React.useState('')
   const [error, setError] = React.useState('')
   const [phone, setPhone] = React.useState("")
-  
 
 
- const [firstname, lastname] = JSON.parse(localStorage.getItem('user-info')).name.split(' ');
 
-const reference = (new Date().getTime().toString()) ;
+  const [firstname, lastname] = JSON.parse(localStorage.getItem('user-info')).name.split(' ');
+
+  const reference = (new Date().getTime().toString());
 
   const imageBaseUrl = "https://hecto-ecom.herokuapp.com/images/";
   const url = "https://hecto-ecom.herokuapp.com/api";
@@ -71,10 +71,10 @@ const reference = (new Date().getTime().toString()) ;
     })
       .then((res) => res.json())
       .then((data) => {
-  
+
         console.log('Getting Shipping info', data.data);
         if (data.error) {
-        swal(data.errors)
+          swal(data.errors)
         }
         if (data.data !== null) {
           console.log('shipping info', data.data);
@@ -92,54 +92,54 @@ const reference = (new Date().getTime().toString()) ;
 
 
 
- 
- const handleClick =() =>{
-  console.log('Pressed');
-  const shipping = {
-    firstname,
-    lastname,
-    email,
-    address,
-    address2,
-    city,
-    state, 
-    zip,
-    user_id: JSON.parse(localStorage.getItem('user-info')).id,
-    phone,
-  }
-  console.log(shipping)
-  //check if input is empty
-  if(shipping.address === '' || shipping.city === ''){
-  swal('Please fill all details')
-    return;
-  }
- 
 
-  //call api to set or update shipping info
-  fetch(`${url}/shipping`, {
-    method: "POST",
-    headers: myHeaders,
-    body: JSON.stringify(shipping),
-  })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log(data);
-    localStorage.setItem("shipping-info", JSON.stringify(data.data))
-    if (data.error) {
-      swal(data.errors)
+  const handleClick = () => {
+    console.log('Pressed');
+    const shipping = {
+      firstname,
+      lastname,
+      email,
+      address,
+      address2,
+      city,
+      state,
+      zip,
+      user_id: JSON.parse(localStorage.getItem('user-info')).id,
+      phone,
     }
-  })
-  .catch((err) => console.log(err));
- 
-}
+    console.log(shipping)
+    //check if input is empty
+    if (shipping.address === '' || shipping.city === '') {
+      swal('Please fill all details')
+      return;
+    }
+
+
+    //call api to set or update shipping info
+    fetch(`${url}/shipping`, {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(shipping),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("shipping-info", JSON.stringify(data.data))
+        if (data.error) {
+          swal(data.errors)
+        }
+      })
+      .catch((err) => console.log(err));
+
+  }
   const cart = JSON.parse(localStorage.getItem('react-use-cart'));
 
 
-const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
+  const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
 
-  const shipping_id = shippingInfo !== null ? shippingInfo.id : JSON.parse(localStorage.getItem('user-info')).id; 
+  const shipping_id = shippingInfo !== null ? shippingInfo.id : JSON.parse(localStorage.getItem('user-info')).id;
 
-  
+
   //headers
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -160,19 +160,19 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
 
 
 
-   const handleClick2 =() =>{
-   
-   console.log('Pressed2');
+  const handleClick2 = () => {
+
+    console.log('Pressed2');
 
     fetch(`${url}/initailpayment`, myInit)
       .then(response => response.json())
       .then(data => {
         console.log(data);
         if (data.error) {
-         swal(data.errors)
+          swal(data.errors)
         }
       })
- }
+  }
 
 
 
@@ -187,11 +187,11 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
   React.useEffect(() => {
     // checkUser()
     swal('Please fill in your shipping information to continue')
-   callShipping()
+    callShipping()
   }, []);
 
 
-  
+
 
   const noItems = <dv>
     <h1>No items in cart </h1>
@@ -212,7 +212,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
     onSuccess: (response) => {
       const payment = {
         reference: reference,
-        status: response.status, 
+        status: response.status,
         email: user.email,
         name: user.name,
         cart,
@@ -226,39 +226,40 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
         headers: myHeaders,
         body: JSON.stringify(payment),
       })
-      .then((res) => res.json())
-      .then((data) => {
-        if(data.success === 'success'){
-        console.log(data);
-        emptyCart();
-       swal('Thank You !','Payment Successful', 'success')
-        setTimeout(() => {
-          navigate('/completed')
-        }, 1000);
-      }
-        if (data.error) {
-         swal(data.errors)
-        }
-      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('test', data)
+          if (data.success === 'success') {
+            console.log(data);
+            emptyCart();
+            swal('Thank You !', 'Payment Successful', 'success')
+            setTimeout(() => {
+              navigate('/completed')
+            }, 1000);
+          }
+          if (data.error) {
+            swal(data.errors)
+          }
+        })
 
     },
-      //call api to set or update shipping info
-  
-      // alert("Thanks for doing business with us! Come back soon!!"),
-    
+    //call api to set or update shipping info
 
-    onClose: () => swal('oops',"Payment Cancelled", 'error'),
+    // alert("Thanks for doing business with us! Come back soon!!"),
+
+
+    onClose: () => swal('oops', "Payment Cancelled", 'error'),
   }
- 
+
   //call api to get shipping info
 
 
   return (
     <div>
-     
-      <Nav/>
+
+      <Nav />
       <Header
-      title = "Hekto Demo"
+        title="Hekto Demo"
       />
       <div className="container">
         <div className="row">
@@ -269,14 +270,14 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
               <h5 className="contact-info">Contact Information</h5>
 
               <h6 className="contact-info-p">
-               {
-                 user? user.name :
+                {
+                  user ? user.name :
                     <Link to='/login' >
                       Already have an account? Log in
                     </Link>
-               }
+                }
               </h6>
-          
+
               <div>
                 <input
                   className="checkout-input"
@@ -294,7 +295,7 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
                 </label>
 
                 <div className="row shipping-add-div">
-                  { error !== '' ? <div className="alert alert-danger">{error}</div> : null }
+                  {error !== '' ? <div className="alert alert-danger">{error}</div> : null}
                   <h4 className="shipping-txt">Shipping Address</h4>
                   <div className="col-lg-6">
                     <input
@@ -366,46 +367,46 @@ const shippingInfo = JSON.parse(localStorage.getItem('shipping-info'));
                     />
                   </div>
                 </div>
-              {
-                user.email ? <button onClick={ handleClick }  className="proceed-btn">Update Shipping </button>:
+                {
+                  user.email ? <button onClick={handleClick} className="proceed-btn">Update Shipping </button> :
                     <Link to={'/shop'}> <button className="proceed-btn">Continue Shopping</button></Link>
-               
-              }                
+
+                }
               </div>
             </div>
           </div>
           <div className="col-lg-4 checked-out-prod" >
 
-          {
-            items === undefined || items.length === 0 ? noItems :
-            items.map(item => (
-              <CheckoutProduct
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                qty={item.quantity}
-                price={(item.price * item.quantity)}
-                color={item.color}
-                size={item.size}
-                image={imageBaseUrl + item.image}
-                />
-            ))
-          }
+            {
+              items === undefined || items.length === 0 ? noItems :
+                items.map(item => (
+                  <CheckoutProduct
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    qty={item.quantity}
+                    price={(item.price * item.quantity)}
+                    color={item.color}
+                    size={item.size}
+                    image={imageBaseUrl + item.image}
+                  />
+                ))
+            }
 
-          <CartTotals
-            total={cartTotal}
-            noItems={noItems}
-            total1={cartTotal}
-            title={ 
-              <PaystackButton {...componentProps} />}
-            link={''}
-            press={ callFunction }
-          />
+            <CartTotals
+              total={cartTotal}
+              noItems={noItems}
+              total1={cartTotal}
+              title={
+                <PaystackButton {...componentProps} />}
+              link={''}
+              press={callFunction}
+            />
 
           </div>
         </div>
       </div>
-    
+
     </div>
   );
 }
